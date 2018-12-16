@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'vxklv4@&!enjg77nv+_!fvthqr5zzevyot12&($c5u77n!06g$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True#False#True
+DEBUG = True #False #True
 
 # The simplest case: just add the domain name(s) and IP addresses of your Django server
 # ALLOWED_HOSTS = [ 'example.com', '203.0.113.5']
@@ -43,9 +43,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'OPS',
+    'TLS.templatetags.custom_tag_defs',
 'TLS', # added as a last resort for db files
+'users.apps.UsersConfig', # new custom Auth
+#'users.apps.cust_users', # part of the custom auth tut
 	#'UserAccounts',
+    
+
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser' # new custom auth
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'crum.CurrentRequestUserMiddleware',
 ]
 
 ROOT_URLCONF = 'OPS.urls'
@@ -84,6 +94,9 @@ TEMPLATES = [
 ]
 
 
+
+
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -97,16 +110,26 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    'postgres': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'lessonPlans',
-        'USER': 'ubuntu', # master is another superuser
-        'PASSWORD': 'ubuntu', # master is the password for master also
-        'HOST': 'localhost',
-        'PORT': '9000',
     }
 }
+
+"""
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'postgres': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',  #/home/ubuntu/django-apps/env/lib/python3.5/site-packages/postgres
+        'NAME': 'masterdb',    #'lessonplans',
+        'USER': 'postgres', #'postgres', # master is another superuser
+        'PASSWORD': 'p@ssw0rd',     #'p@ssw0rd', # master is the password for master also
+        'HOST': 'localhost',
+        'PORT': '5432',   #'9000',
+    }
+
+"""
+
+
 
 
 # Password validation
@@ -161,3 +184,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # redirect for login tut
 LOGIN_REDIRECT_URL = '../../HomeTeacher/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+

@@ -4,6 +4,8 @@ from django.shortcuts import render, HttpResponse
 
 
 def home4(request):
+"""!@brief Creates the render request for home4.html, the main page for NASS Teacher Home. 
+"""
     	#this is the old way
 	#return HttpResponse("<h2>This is the NSR page.</h2>")
 

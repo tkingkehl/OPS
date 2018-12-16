@@ -161,12 +161,16 @@
             
             .master{
                 background-color: rgb(250, 250, 250);
-                height: 90%;
+                
+                
+                width: 80%;
+                margin-left: 10%;
+
                 /*padding-top: 10%;
                 padding-bottom: 20%;*/
-                z-index: 1;
-                margin-bottom: 5%;
-                margin-top: 5%;
+                z-index: 0;
+                /*margin-bottom: 5%;
+                margin-top: 5%;*/
                 
                  
                 
@@ -189,15 +193,24 @@
                 height: 100%;
             }
 
-                    
+              body {
+  background: blue; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, blue, #0059ea);
+  background: -moz-linear-gradient(right, blue, #0059ea);
+  background: -o-linear-gradient(right, blue, #0059ea);
+  background: linear-gradient(to left, blue, #0059ea);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}    
     
         </style>
        
     </head>
     <body>
-        <div class="backgroundImage">
+        <!--<div class="backgroundImage">-->
             <!--<img src="/static/science.jpg">-->
         {% block content %}{% endblock %}
-    </div>
+    <!--</div>-->
     </body>
 </html>

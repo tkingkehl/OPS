@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path, include
+from django.urls import path, include, re_path
 from NSR.views import home22 # part of hard coded way, no templates, 1
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from ManageUserAccounts.views import home1
 from SubHistory.views import home2
 from NASSHomeTeacher.views import home4
 from UserAccounts.views import login, register, profile
-from TLS.views import home10, home11
+from TLS.views import home11, Form 
+#, home10
 from django.views.generic.base import TemplateView #for auth tut
+import django.views.defaults
 
 
 # file upload tut https://simpleisbetterthancomplex.com/tutorial/2016/08/01/how-to-upload-files-with-django.html
@@ -31,20 +33,29 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-
+from TLS.views import UploadView
+#from TLS.views import ContactView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     
     # this is the hard coded way to do this, attempt 1
     path('NSR/', home22, name = 'home22'),
-    path('ManageAccounts/', home1, name = 'home1'),
+    #path('ManageAccounts/', home1, name = 'home1'),
     path('Submissions/', home2, name = 'home2'),
     path('HomeTeacher/', home4, name='home4'),
     path('', login, name='login'), # changed for auth tut, was '' (the home screen the css is here)
-    path('Register/', register, name='register'),
-    path('Profile/', profile, name='profile'),
-    path('UploadLessonPlans/', home10, name='home10'),
+    #path('Register/', register, name='register'),
+    path('Register/', register.as_view()),
+    # path('Profile/', profile.as_view(), name='profile'),
+	path('Profile/', auth_views.PasswordChangeView.as_view(template_name='profile.html'), name='profile'),
+    #path('UploadLessonPlans/', home10, name='home10'),
+    #path('UploadLessonPlans/', UploadView.as_view()),
+    path('UploadLessonPlans/', Form, name = 'Form'),
+    path('404/', django.views.defaults.page_not_found ),
+
+    #path('UploadLessonPlans/', ContactView.as_view()),
+
     path('UploadResults/', home11, name='home11'),
 
     # auth tut
