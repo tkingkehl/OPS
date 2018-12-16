@@ -21,7 +21,7 @@ class Register(generic.CreateView):
 #context = {}
 	#return render(request, 'login.html', context)
 def login(request):
-"""! Redirects to the login page.
+"""!@brief Redirects to the login page.
 """
     return redirect("/accounts/login")
 	
